@@ -50,10 +50,12 @@ export class CadastroComponent implements OnInit, AfterViewInit {
       },
       confirmPassword: {
         required: 'Informe a senha novamente',
-        rangeLength: 'Asenha deve possuir entre 6 e 15 caracteres',
+        rangeLength: 'A senha deve possuir entre 6 e 15 caracteres',
         equalTo: 'As senhas não conferem',
       },
     };
+
+    this.geenericValidator = new GenericValidator(this.validationMessages);
   }
 
   ngOnInit(): void {
@@ -64,6 +66,7 @@ export class CadastroComponent implements OnInit, AfterViewInit {
     let senhaConfirm = new FormControl('', [
       Validators.required,
       CustomValidators.rangeLength([6, 15]),
+      CustomValidators.equalTo(senha),
     ]);
 
     this.cadastroForm = this.fb.group({
