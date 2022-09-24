@@ -103,7 +103,14 @@ export class CadastroComponent implements OnInit, AfterViewInit {
     }
   }
 
-  processarSucesso(response: any) {}
+  processarSucesso(response: any) {
+    this.cadastroForm.reset();
+    this.errors = [];
 
-  processarFalha(fail: any) {}
+    this.contaService.LocalStorage.salvarDadosLocaisUsuario(response);
+  }
+
+  processarFalha(fail: any) {
+    this.errors = fail.error.errors;
+  }
 }
